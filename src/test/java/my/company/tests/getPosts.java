@@ -17,11 +17,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
-public class getPostsTest {
+public class getPosts {
     private static HttpURLConnection connection;
 
     @Step("Отправка GET запроса на сайт {targetUrl}")
@@ -72,10 +71,11 @@ public class getPostsTest {
             int id = album.getInt("id");
             int userId = album.getInt("userId");
             String title = album.getString("title");
-//            String body = album.getString("body");
-//            System.out.println("Id:"+ id + "\nTitle:" + title + "\nUserId:" + userId + "\nBody:" + body);
-//            System.out.println("--------------------------------------------");
+            String body = album.getString("body");
+            System.out.println("Id:"+ id + "\nTitle:" + title + "\nUserId:" + userId + "\nBody:" + body);
+            System.out.println("--------------------------------------------");
         }
+        System.out.println(albums.toString());
         return albums.toString();
 
     }

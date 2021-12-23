@@ -1,8 +1,10 @@
-package my.company.tests;
+package testsCases;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.junit4.DisplayName;
+import methods.getPosts;
+import methods.postJson;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -17,7 +19,11 @@ public class testCaseTest {
     @Description("Отправка GET запроса на сайт")
     @Test
     public void getPost(){
-        get.getPostList("http://jsonplaceholder.typicode.com/posts",5000,5000);
+        String targetUrl = "http://jsonplaceholder.typicode.com/posts";
+        int connectionTimeOut = 5000;
+        int connectionReadTime = 5000;
+
+        get.getPostList(targetUrl,connectionTimeOut,connectionReadTime);
     }
 
 

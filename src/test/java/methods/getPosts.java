@@ -1,4 +1,4 @@
-package my.company.tests;
+package methods;
 
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
@@ -36,16 +36,16 @@ public class getPosts {
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(connectionTimeOut);
             connection.setReadTimeout(readTimeOut);
+            connection.setDoInput(true);
 
             int status = connection.getResponseCode();
             System.out.println(status);
             if (status > 299) {
                 System.out.println("fail");
-                Assert.assertTrue("Статус код от сервера не является валидным",status >299);
-            }
-            else {
+                Assert.assertTrue("Статус код от сервера не является валидным", status > 299);
+            } else {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                while ((line = reader.readLine()) != null){
+                while ((line = reader.readLine()) != null) {
                     responseContent.append(line);
                 }
                 reader.close();
@@ -63,16 +63,16 @@ public class getPosts {
 
     @Attachment(value = "Вложение", type = "application/json", fileExtension = ".txt")
     @Step("Парсинг полученного ответа")
-    private String parsePost(String responseBody){
+    private String parsePost(String responseBody) {
         Assert.assertNotNull(responseBody);
         JSONArray albums = new JSONArray(responseBody);
-        for (int i =0; i < albums.length(); i++){
+        for (int i = 0; i < albums.length(); i++) {
             JSONObject album = albums.getJSONObject(i);
             int id = album.getInt("id");
             int userId = album.getInt("userId");
             String title = album.getString("title");
             String body = album.getString("body");
-            System.out.println("Id:"+ id + "\nTitle:" + title + "\nUserId:" + userId + "\nBody:" + body);
+            System.out.println("Id:" + id + "\nTitle:" + title + "\nUserId:" + userId + "\nBody:" + body);
             System.out.println("--------------------------------------------");
         }
         System.out.println(albums.toString());

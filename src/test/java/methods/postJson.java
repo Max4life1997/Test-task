@@ -1,4 +1,4 @@
-package my.company.tests;
+package methods;
 
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class postJson {
 
-        @Step("Отправка POST запроса на сайт {targetUrl}")
+    @Step("Отправка POST запроса на сайт {targetUrl}")
     public void postJson(String targetUrl, JSONObject jsonDataToSend, int connectionTimeOut, int readTimeOut) {
         String urlAdress = targetUrl;
         HttpURLConnection connection;
@@ -32,6 +32,7 @@ public class postJson {
         try {
             url = new URL(urlAdress);
             connection = (HttpURLConnection) url.openConnection();
+
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
             connection.setDoInput(true);
@@ -53,7 +54,7 @@ public class postJson {
             int status = connection.getResponseCode();
             if (status > 299) {
                 System.out.println(status);
-                Assert.assertFalse("Статус код("+ status+") от сервера не является валидным", status > 299);
+                Assert.assertFalse("Статус код(" + status + ") от сервера не является валидным", status > 299);
             } else {
                 System.out.println(status);
                 String line;
@@ -68,7 +69,7 @@ public class postJson {
             }
 
         } catch (IOException e) {
-            Assert.assertNull("",e);
+            Assert.assertNull("", e);
         }
     }
 
@@ -76,7 +77,8 @@ public class postJson {
     @Attachment(value = "Вложение", type = "application/json", fileExtension = ".txt")
     @Step("Чтение полученного ответа")
     private String parsePost(StringBuilder responseBody) {
-        Assert.assertNotNull(responseBody);{
+        Assert.assertNotNull(responseBody);
+        {
         }
         return responseBody.toString();
 
